@@ -15,6 +15,7 @@ Furthermore, important distributors will also have access to the system in order
 ![image](https://github.com/user-attachments/assets/df4a5756-9b1b-4605-a079-753dbf9724f4)
 ![image](https://github.com/user-attachments/assets/9d0e983a-a784-46b1-b3ec-6b50c7b00e46)
 ![image](https://github.com/user-attachments/assets/f3a69e9d-0623-42c3-9f8d-2c3a7ef25a60)
+![image](https://github.com/user-attachments/assets/e71d78fc-5896-483b-8382-f9c61c6bce73)
 
 
 ## Documentations
