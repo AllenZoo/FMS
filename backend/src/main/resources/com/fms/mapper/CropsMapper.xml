@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.server.mapper.CropMapper">
+    <select id="getCrops">
+        SELECT * FROM crops
+    </select>
+
+    <select id="getCropsFiltered">
+        SELECT * FROM crops
+        WHERE crop_type = IFNULL(#{filterModel.cropType}, crop_type)
+        AND   crop_variant = IFNULL(#{filterModel.cropVariant}, crop_variant)
+        AND   crop_status = IFNULL(#{filterModel.cropStatus}, crop_status)
+        AND   quantity &lt;= IFNULL(#{filterModel.maxQuantity}, quantity)
+        AND   quantity >= IFNULL(#{filterModel.minQuantity}, quantity)
+    </select>
+
+    <select id="getCropByKey">
+        SELECT * FROM crops
+        WHERE crop_type = #{cropType}
+        AND   crop_variant = #{cropVariant}
+        AND   crop_status = #{cropStatus}
+    </select>
+
+    <insert id="insertCrop">
+        INSERT INTO crops (crop_type, crop_variant, crop_status, quantity)
+        VALUES (#{crop.cropType}, #{crop.cropVariant}, #{crop.cropStatus}, #{crop.quantity})
+        ON DUPLICATE KEY UPDATE quantity = quantity + #{crop.quantity};
+    </insert>
+
+    <update id="updateCrop">
+        UPDATE crops
+        SET quantity = #{crop.quantity}
+        WHERE crop_type = #{cropType}
+        AND   crop_variant = #{cropVariant}
+        AND   crop_status = #{cropStatus}
+    </update>
+
+    <delete id="deleteCrop">
+        DELETE FROM crops
+        WHERE crop_type = #{cropType}
+        AND   crop_variant = #{cropVariant}
+        AND   crop_status = #{cropStatus}
+    </delete>
+</mapper>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.server.mapper.UserMapper">
+    <select id="getAllUser" resultType="com.server.model.user.UserModel">
+        SELECT user_id AS userID,
+        username AS username,
+        password AS password,
+        first_name AS firstName,
+        last_name AS lastName,
+        role AS role,
+        last_login AS lastLogin
+        FROM users
+        ORDER BY userID
+    </select>
+
+    <select id="getUserByID" parameterType="int" resultType="com.server.model.user.UserModel">
+        SELECT user_id,
+        username AS username,
+        password AS password,
+        first_name AS firstName,
+        last_name AS lastName,
+        role AS role,
+        last_login AS lastLogin
+        FROM users
+        WHERE user_id = #{userID}
+    </select>
+
+    <insert id="insertUser">
+        INSERT INTO users (user_id, username, password, first_name, last_name, role, last_login)
+        VALUES (#{user.userID}, #{user.username}, #{user.password}, #{user.firstName}, #{user.lastName},
+        #{user.role}, #{user.lastLogin})
+    </insert>
+
+    <update id="updateUser">
+        UPDATE users
+        SET username = #{user.username},
+        password = #{user.password},
+        first_name = #{user.firstName},
+        last_name = #{user.lastName},
+        role = #{user.role},
+        last_login = #{user.lastLogin}
+        WHERE user_id = #{userID}
+    </update>
+
+    <delete id="deleteUser">
+        DELETE FROM users
+        WHERE user_id = #{userID}
+    </delete>
+</mapper>

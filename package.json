@@ -1,0 +1,15 @@
+{
+  "name": "farm-management-system",
+  "version": "1.0.0",
+  "description": "This project is a farm management system that keeps track of many farming utilities and  processes such as facilities, fields, animals, crops, farmers, products, and buyers, with the  intention of helping farm owners manage their farms more efficiently and effectively.",
+  "scripts": {
+    "client": "cd frontend && npm start",
+    "server": "cd backend && npm start",
+    "start": "concurrently \"npm run server\" \"npm run client\"",
+    "install": "concurrently \"cd frontend && yarn install\" \"cd backend && mvn dependency:resolve\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jon-chow/Farm-Management-System.git"
+  }
+}

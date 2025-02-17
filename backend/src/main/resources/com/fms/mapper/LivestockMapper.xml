@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.server.mapper.LivestockMapper">
+    <select id="getAllLivestock" resultType="com.server.model.livestock.LivestockModel">
+        SELECT *
+        FROM livestock
+        ORDER BY tag_id
+    </select>
+
+    <select id="getFilteredLivestock">
+        SELECT *
+        FROM livestock
+        WHERE age >= COALESCE(#{filterModel.minAge}, age)
+        AND age &lt;= COALESCE(#{filterModel.maxAge}, age)
+        AND tag_id >= COALESCE(#{filterModel.minTagID}, tag_id)
+        AND tag_id &lt;= COALESCE(#{filterModel.maxTagID}, tag_id)
+        AND harvestable = COALESCE(#{filterModel.harvestable}, harvestable)
+        AND animal_type = COALESCE(#{filterModel.animalType}, animal_type)
+        AND diet = COALESCE(#{filterModel.diet}, diet)
+    </select>
+
+    <select id="getLivestockByID">
+        SELECT *
+        FROM livestock
+        WHERE tag_id = #{tagID}
+    </select>
+
+    <insert id="insertLivestock">
+        INSERT INTO livestock (tag_id, animal_type, age, diet, weight, last_fed, harvestable,
+        last_violated_for_harvested_goods)
+        VALUES (#{livestock.tagID}, #{livestock.animalType}, #{livestock.age}, #{livestock.diet}, #{livestock.weight},
+        #{livestock.lastFed}, #{livestock.harvestable}, #{livestock.lastViolatedForHarvestedGoods})
+    </insert>
+
+    <update id="updateLivestock">
+        UPDATE livestock
+        SET animal_type = #{livestock.animalType},
+        age = #{livestock.age},
+        diet = #{livestock.diet},
+        weight = #{livestock.weight},
+        last_fed = #{livestock.lastFed},
+        harvestable = #{livestock.harvestable},
+        last_violated_for_harvested_goods = #{livestock.lastViolatedForHarvestedGoods}
+        WHERE tag_id = #{tagID}
+    </update>
+
+    <delete id="deleteLivestock">
+        DELETE FROM livestock
+        WHERE tag_id = #{tagID}
+    </delete>
+</mapper>

@@ -1,0 +1,9 @@
+{
+  "name": "backend",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "compile": "mvn -q clean install",
+    "start": "mvn -q spring-boot:run"
+  }
+}
